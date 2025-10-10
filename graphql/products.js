@@ -48,6 +48,10 @@ const ProductFragment = `
             name
             value
           }
+          image {
+            url
+            altText
+          }
         }
       }
     }

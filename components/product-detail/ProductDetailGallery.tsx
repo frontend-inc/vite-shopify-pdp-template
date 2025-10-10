@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
 interface ProductImage {
   url: string;
@@ -7,10 +7,16 @@ interface ProductImage {
 
 interface ProductDetailGalleryProps {
   images: ProductImage[];
+  selectedImageIndex?: number;
+  onImageSelect?: (index: number) => void;
 }
 
-const ProductDetailGallery: React.FC<ProductDetailGalleryProps> = ({ images }) => {
-  const [selectedImage, setSelectedImage] = useState(0);
+const ProductDetailGallery: React.FC<ProductDetailGalleryProps> = ({
+  images,
+  selectedImageIndex = 0,
+  onImageSelect
+}) => {
+  const selectedImage = selectedImageIndex;
 
   return (
     <div>
@@ -35,10 +41,10 @@ const ProductDetailGallery: React.FC<ProductDetailGalleryProps> = ({ images }) =
           {images.map((image, index) => (
             <button
               key={index}
-              onClick={() => setSelectedImage(index)}
+              onClick={() => onImageSelect?.(index)}
               className={`aspect-square rounded-lg overflow-hidden border-2 transition-colors ${
-                selectedImage === index 
-                  ? 'border-black' 
+                selectedImage === index
+                  ? 'border-black'
                   : 'border-gray-200 hover:border-gray-300'
               }`}
             >

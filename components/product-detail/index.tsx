@@ -23,6 +23,7 @@ interface ProductVariant {
     name: string;
     value: string;
   }>;
+  image?: ProductImage;
 }
 
 interface ProductOption {
@@ -70,6 +71,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ handle, onAddToCart: onAd
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
   const [quantity, setQuantity] = useState(1);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   useEffect(() => {
     if (!handle) return;
@@ -116,13 +118,23 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ handle, onAddToCart: onAd
 
     // Find matching variant
     const matchingVariant = product?.variants.edges.find(({ node }) => {
-      return node.selectedOptions.every(option => 
+      return node.selectedOptions.every(option =>
         newOptions[option.name] === option.value
       );
     });
 
     if (matchingVariant) {
       setSelectedVariant(matchingVariant.node);
+
+      // Update selected image if variant has an image
+      if (matchingVariant.node.image && product) {
+        const imageIndex = product.images.edges.findIndex(
+          ({ node }) => node.url === matchingVariant.node.image?.url
+        );
+        if (imageIndex !== -1) {
+          setSelectedImageIndex(imageIndex);
+        }
+      }
     }
   };
 
@@ -207,8 +219,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ handle, onAddToCart: onAd
     <div className="bg-white">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <ProductDetailGallery 
+          <ProductDetailGallery
             images={product.images.edges.map(edge => edge.node)}
+            selectedImageIndex={selectedImageIndex}
+            onImageSelect={setSelectedImageIndex}
           />
           <ProductDetailInfo
             product={product}
