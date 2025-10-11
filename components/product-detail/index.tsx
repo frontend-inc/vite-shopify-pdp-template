@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getProduct } from '../../services/shopify/api';
 import { useCart } from '../../contexts/CartContext';
-import ProductDetailGallery from './ProductDetailGallery';
-import ProductDetailInfo from './ProductDetailInfo';
+import ProductDetailGallery from '@/components/product-detail/ProductDetailGallery';
+import ProductDetailInfo from '@/components/product-detail/ProductDetailInfo';
 
 interface ProductImage {
   url: string;
