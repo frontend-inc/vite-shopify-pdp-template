@@ -4,11 +4,13 @@ import Footer from './Footer';
 import ProductDetail from './product-detail';
 
 const Home: React.FC = () => {
+  const productHandle = import.meta.env.VITE_SHOPIFY_PRODUCT || 'women-t-shirt';
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
-        <ProductDetail handle="women-t-shirt" />
+        <ProductDetail handle={productHandle} />
       </main>
       <Footer />
     </div>
