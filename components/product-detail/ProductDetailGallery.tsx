@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 interface ProductImage {
   url: string;
@@ -34,10 +35,11 @@ const ProductDetailGallery: React.FC<ProductDetailGalleryProps> = ({ images, sel
       {images.length > 1 && (
         <div className="grid grid-cols-4 gap-2">
           {images.map((image, index) => (
-            <button
+            <Button
               key={index}
+              variant="ghost"
               onClick={() => onImageChange(index)}
-              className={`aspect-square rounded-lg overflow-hidden border-2 transition-colors ${
+              className={`aspect-square h-auto p-0 rounded-lg overflow-hidden border-2 transition-colors ${
                 selectedImageIndex === index
                   ? 'border-black'
                   : 'border-gray-200 hover:border-gray-300'
@@ -48,7 +50,7 @@ const ProductDetailGallery: React.FC<ProductDetailGalleryProps> = ({ images, sel
                 alt={image.altText || 'Product thumbnail'}
                 className="w-full h-full object-cover"
               />
-            </button>
+            </Button>
           ))}
         </div>
       )}

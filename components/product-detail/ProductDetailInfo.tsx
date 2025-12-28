@@ -1,5 +1,5 @@
 import React from 'react';
-import { Product, ProductVariant } from './index.tsx';
+import { Product, ProductVariant } from './types';
 import { Button } from '../ui/button';
 
 interface ProductDetailInfoProps {
