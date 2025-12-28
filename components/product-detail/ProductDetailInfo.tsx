@@ -1,5 +1,6 @@
 import React from 'react';
 import { Product, ProductVariant } from './index.tsx';
+import { Button } from '../ui/button';
 
 interface ProductDetailInfoProps {
   product: Product;
@@ -23,7 +24,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoProps> = ({
   const formatPrice = (price: { amount: string; currencyCode: string }) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: price.currencyCode,
+      currency: 'USD',
     }).format(parseFloat(price.amount));
   };
 
@@ -33,16 +34,13 @@ const ProductDetailInfo: React.FC<ProductDetailInfoProps> = ({
 
   return (
     <div>
-      <h1 
-        className="text-4xl font-bold text-gray-900 mb-4"
-        style={{ fontFamily: 'Space Grotesk, sans-serif' }}
-      >
+      <h1 className="text-4xl font-bold text-gray-900 mb-4 font-heading">
         {product.title}
       </h1>
 
       {/* Price */}
       <div className="flex items-center space-x-4 mb-6">
-        <span className="text-3xl font-bold text-gray-900">
+        <span className="text-2xl font-bold text-gray-900">
           {formatPrice(price)}
         </span>
         {hasDiscount && compareAtPrice && (
@@ -69,28 +67,26 @@ const ProductDetailInfo: React.FC<ProductDetailInfoProps> = ({
       )}
 
       {/* Product Options */}
-      {product.options.map(option => (
-        <div key={option.id} className="mb-6">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            {option.name}
-          </label>
-          <div className="flex flex-wrap gap-2">
-            {option.values.map(value => (
-              <button
-                key={value}
-                onClick={() => onOptionChange(option.name, value)}
-                className={`px-4 py-2 border rounded-lg font-medium transition-colors ${
-                  selectedOptions[option.name] === value
-                    ? 'border-black bg-black text-white'
-                    : 'border-gray-300 text-gray-700 hover:border-gray-400'
-                }`}
-              >
-                {value}
-              </button>
-            ))}
+      {product.options
+        .filter(option => option.name !== 'Title')
+        .map(option => (
+          <div key={option.id} className="mb-6">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              {option.name}
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {option.values.map(value => (
+                <Button
+                  key={value}
+                  onClick={() => onOptionChange(option.name, value)}
+                  variant={selectedOptions[option.name] === value ? 'default' : 'outline'}
+                >
+                  {value}
+                </Button>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
 
       {/* Quantity Selector */}
       <div className="mb-8">
@@ -98,36 +94,34 @@ const ProductDetailInfo: React.FC<ProductDetailInfoProps> = ({
           Quantity
         </label>
         <div className="flex items-center border border-gray-300 rounded-lg w-32">
-          <button
+          <Button
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="p-2 hover:bg-gray-100 transition-colors"
+            variant="ghost"
+            size="icon-sm"
             disabled={quantity <= 1}
           >
             <i className="ri-subtract-line"></i>
-          </button>
-          <span className="flex-1 text-center font-semibold">{quantity}</span>
-          <button
+          </Button>
+          <span className="flex-1 text-center font-semibold text-sm">{quantity}</span>
+          <Button
             onClick={() => setQuantity(quantity + 1)}
-            className="p-2 hover:bg-gray-100 transition-colors"
+            variant="ghost"
+            size="icon-sm"
           >
             <i className="ri-add-line"></i>
-          </button>
+          </Button>
         </div>
       </div>
 
       {/* Add to Cart Button */}
-      <button
+      <Button
         onClick={handleAddToCart}
         disabled={!selectedVariant?.availableForSale}
-        className={`w-full py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 ${
-          selectedVariant?.availableForSale
-            ? 'bg-black text-white hover:bg-gray-800 active:scale-95'
-            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-        }`}
-        style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+        size="lg"
+        className="w-full py-4 text-lg"
       >
         {selectedVariant?.availableForSale ? 'Add to Cart' : 'Out of Stock'}
-      </button>
+      </Button>
 
       {/* Additional Info */}
       <div className="mt-8 pt-8 border-t border-gray-200">

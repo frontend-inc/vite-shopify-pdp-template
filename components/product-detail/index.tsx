@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getProduct } from '../../services/shopify/api';
 import { useCart } from '../../contexts/CartContext';
-import ProductDetailGallery from '@/components/product-detail/ProductDetailGallery';
-import ProductDetailInfo from '@/components/product-detail/ProductDetailInfo';
+import ProductDetailGallery from './ProductDetailGallery';
+import ProductDetailInfo from './ProductDetailInfo';
+import { Button } from '../ui/button';
 
 interface ProductImage {
   url: string;
@@ -23,7 +24,10 @@ interface ProductVariant {
     name: string;
     value: string;
   }>;
-  image?: ProductImage;
+  image?: {
+    url: string;
+    altText?: string;
+  };
 }
 
 interface ProductOption {
@@ -126,7 +130,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ handle, onAddToCart: onAd
     if (matchingVariant) {
       setSelectedVariant(matchingVariant.node);
 
-      // Update selected image if variant has an image
+      // Update image if variant has an associated image
       if (matchingVariant.node.image && product) {
         const imageIndex = product.images.edges.findIndex(
           ({ node }) => node.url === matchingVariant.node.image?.url
@@ -204,12 +208,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ handle, onAddToCart: onAd
           <p className="text-red-600 mb-4">
             {error || 'The requested product could not be found.'}
           </p>
-          <button
+          <Button
             onClick={() => window.history.back()}
-            className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
+            variant="destructive"
           >
             Go Back
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -222,7 +226,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ handle, onAddToCart: onAd
           <ProductDetailGallery
             images={product.images.edges.map(edge => edge.node)}
             selectedImageIndex={selectedImageIndex}
-            onImageSelect={setSelectedImageIndex}
+            onImageChange={setSelectedImageIndex}
           />
           <ProductDetailInfo
             product={product}
@@ -234,7 +238,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ handle, onAddToCart: onAd
             onOptionChange={handleOptionChange}
           />
         </div>
-      </div>    
+      </div>
     </div>
   );
 };

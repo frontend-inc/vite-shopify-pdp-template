@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ProductDetail from './product-detail/index';
+import { Button } from './ui/button';
 
 interface ProductImage {
   url: string;
@@ -83,13 +84,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
     >
       <div className="bg-white rounded-lg shadow-2xl max-w-7xl w-full max-h-[90vh] overflow-y-auto relative">
         {/* Close Button */}
-        <button
+        <Button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors"
+          variant="ghost"
+          size="icon"
+          className="absolute top-4 right-4 z-10 bg-white rounded-full hover:bg-gray-100"
           aria-label="Close modal"
         >
           <i className="ri-close-line text-2xl text-gray-700"></i>
-        </button>
+        </Button>
 
         {/* Product Detail Component */}
         <ProductDetail handle={product.handle} onAddToCart={onClose} />

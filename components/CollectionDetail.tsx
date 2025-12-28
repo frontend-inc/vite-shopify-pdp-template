@@ -95,10 +95,7 @@ const CollectionDetail: React.FC<CollectionDetailProps> = ({ collectionHandle })
     return (
       <div className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 
-            className="text-5xl font-bold text-center mb-16 text-gray-900"
-            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
-          >
+          <h2 className="text-5xl font-bold text-center mb-16 text-gray-900 font-heading">
             Collection
           </h2>
           
@@ -149,10 +146,7 @@ const CollectionDetail: React.FC<CollectionDetailProps> = ({ collectionHandle })
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <h1
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white text-center px-4"
-              style={{ fontFamily: 'Space Grotesk, sans-serif' }}
-            >
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white text-center px-4 font-heading">
               {collection.title}
             </h1>
           </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useCart } from '../contexts/CartContext';
 import { truncate } from '../lib/utils';
+import { Card, CardContent } from './ui/card';
+import { Button } from './ui/button';
 
 interface ProductImage {
   url: string;
@@ -94,7 +96,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onClick
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+    <Card className="!py-0 !gap-0 overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
       {/* Product Image */}
       <div
         className="aspect-square overflow-hidden bg-gray-100 relative cursor-pointer"
@@ -115,7 +117,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onClick
             <i className="ri-image-line text-6xl"></i>
           </div>
         )}
-        
+
         {/* Discount Badge */}
         {hasDiscount && compareAtPrice && (
           <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
@@ -125,29 +127,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onClick
       </div>
 
       {/* Product Info */}
-      <div className="p-6">
-        <h3
-          className="text-xl font-semibold text-gray-900 mb-1 line-clamp-2 min-h-[3.5rem]"
-          style={{ fontFamily: 'Space Grotesk, sans-serif' }}
-        >
-          {product.title}
+      <CardContent className="p-6">
+        <h3 className="text-xl font-semibold text-gray-900 mb-2 font-heading">
+          {truncate(product.title, 60)}
         </h3>
-
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2 h-[2.5rem]">
-          {product.description || ''}
-        </p>
 
         {/* Price Section */}
         <div className="flex items-center justify-between mb-4">
           <div>
-            <span className="text-lg font-bold text-gray-900">
+            <span className="text-sm font-bold text-muted-foreground">
               ${parseFloat(price.amount).toFixed(2)}
             </span>
           </div>
         </div>
 
         {/* View Details Button */}
-        <button
+        <Button
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -155,13 +150,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onClick
               onClick(product);
             }
           }}
-          className="w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 bg-black text-white hover:bg-gray-800 active:scale-95"
-          style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+          className="w-full"
+          size="lg"
         >
           View Details
-        </button>
-      </div>
-    </div>
+        </Button>
+      </CardContent>
+    </Card>
   );
 };
 
