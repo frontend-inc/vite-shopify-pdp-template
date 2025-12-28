@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import ProductDetail from './product-detail';
+import ProductDetail from './product-detail/ProductDetail';
 
 const Home: React.FC = () => {
   const productHandle = import.meta.env.VITE_SHOPIFY_PRODUCT || 'women-t-shirt';
