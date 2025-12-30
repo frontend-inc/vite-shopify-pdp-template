@@ -4,6 +4,14 @@ import { useCart } from '../../contexts/CartContext';
 import ProductDetailGallery from './ProductDetailGallery';
 import ProductDetailInfo from './ProductDetailInfo';
 import { Button } from '../ui/button';
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from '../ui/breadcrumb';
 
 interface ProductImage {
   url: string;
@@ -199,19 +207,23 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ handle, onAddToCart: onAd
 
   if (error || !product) {
     return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-8 max-w-md mx-auto">
-          <i className="ri-error-warning-line text-4xl text-red-500 mb-4"></i>
-          <h3 className="text-lg font-semibold text-red-800 mb-2">
+      <div className="container mx-auto px-4 py-24 text-center">
+        <div className="max-w-lg mx-auto">
+          <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
+            <i className="ri-shopping-bag-line text-3xl text-gray-400"></i>
+          </div>
+          <h2 className="text-2xl font-heading font-semibold text-gray-900 mb-3">
             Product Not Found
-          </h3>
-          <p className="text-red-600 mb-4">
-            {error || 'The requested product could not be found.'}
+          </h2>
+          <p className="text-gray-500 mb-8 leading-relaxed">
+            {error || "We couldn't find the product you're looking for. It may have been removed or the link might be incorrect."}
           </p>
           <Button
             onClick={() => window.history.back()}
-            variant="destructive"
+            variant="outline"
+            className="px-8"
           >
+            <i className="ri-arrow-left-line mr-2"></i>
             Go Back
           </Button>
         </div>
@@ -222,6 +234,17 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ handle, onAddToCart: onAd
   return (
     <div className="bg-white">
       <div className="container mx-auto px-4 py-8">
+        <Breadcrumb className="mb-6">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{product.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <ProductDetailGallery
             images={product.images.edges.map(edge => edge.node)}

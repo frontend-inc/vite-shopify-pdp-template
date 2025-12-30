@@ -22,11 +22,11 @@ const CartIcon: React.FC = () => {
 const Header: React.FC = () => {
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-30 h-16">
-      <div className="max-w-7xl mx-auto px-4 h-full">
+      <div className="container mx-auto px-4 h-full">
         <div className="flex justify-between items-center h-full">
           {/* Logo */}
           <a to="/" className="text-2xl font-bold text-black font-heading">
-            My Brand
+            Store
           </a>
 
           {/* Cart Icon */}
