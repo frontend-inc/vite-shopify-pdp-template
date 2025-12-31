@@ -147,7 +147,7 @@ const CartDrawer: React.FC = () => {
                       <div className="flex-shrink-0">
                         <button
                           onClick={() => removeItem(item.variantId)}
-                          className="p-1 hover:bg-gray-100 rounded transition-colors text-gray-400 hover:text-red-500"
+                          className="p-1 hover:bg-gray-100 rounded transition-colors text-gray-400 hover:text-gray-600"
                         >
                           <i className="ri-close-line text-lg font-bold"></i>
                         </button>

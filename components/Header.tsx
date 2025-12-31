@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCart } from '../contexts/CartContext';
+import config from '../lib/config.json';
 
 const CartIcon: React.FC = () => {
   const { state, toggleCart } = useCart();
@@ -25,8 +26,16 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 h-full">
         <div className="flex justify-between items-center h-full">
           {/* Logo */}
-          <a to="/" className="text-2xl font-bold text-black font-heading">
-            Store
+          <a href="/" className="text-2xl font-bold text-black font-heading">
+            {config.branding.logo.url ? (
+              <img
+                src={config.branding.logo.url}
+                alt={config.branding.logo.alt || 'Store'}
+                className="h-8"
+              />
+            ) : (
+              'Store'
+            )}
           </a>
 
           {/* Cart Icon */}
