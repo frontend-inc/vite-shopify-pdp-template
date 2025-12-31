@@ -27,10 +27,10 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center h-full">
           {/* Logo */}
           <a href="/" className="text-2xl font-bold text-black font-heading">
-            {config.branding.logo.url ? (
+            {config.brand.logo.url ? (
               <img
-                src={config.branding.logo.url}
-                alt={config.branding.logo.alt || 'Store'}
+                src={config.brand.logo.url}
+                alt={config.brand.logo.alt || 'Store'}
                 className="h-8"
               />
             ) : (

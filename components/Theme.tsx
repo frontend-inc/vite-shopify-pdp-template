@@ -2,10 +2,10 @@ import React from 'react';
 import config from '../lib/config.json';
 
 const Theme: React.FC = () => {
-  const headerFont = config.branding.fonts.header;
-  const bodyFont = config.branding.fonts.body;
-  const primaryColor = config.branding.colors.primary;
-  const secondaryColor = config.branding.colors.secondary;
+  const headerFont = config.brand.fonts.header;
+  const bodyFont = config.brand.fonts.body;
+  const primaryColor = config.brand.colors.primary;
+  const secondaryColor = config.brand.colors.secondary;
 
   return (
     <>
