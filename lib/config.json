@@ -1,0 +1,20 @@
+{
+  "branding": {
+    "colors": {
+      "primary": "#0F172A",
+      "secondary": "#343D4C"
+    },
+    "fonts": {
+      "header": "Playfair Display",
+      "body": "Inter"
+    },
+    "logo": {
+      "url": "",
+      "alt": ""
+    }
+  },
+  "data": {
+    "product": "mens-performance-t-short",
+    "collection": "home"
+  }
+}
