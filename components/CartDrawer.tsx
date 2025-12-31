@@ -51,10 +51,9 @@ const CartDrawer: React.FC = () => {
           <SheetContent className="w-full max-w-md" showCloseButton={false}>
             {/* Header */}
             <SheetHeader className="h-16 justify-center items-start">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between w-full">
                 <SheetTitle
-                  className="text-2xl font-bold"
-                  style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                  className="text-2xl font-bold font-heading"
                 >
                   Shopping Cart ({state.itemCount})
                 </SheetTitle>
@@ -165,7 +164,7 @@ const CartDrawer: React.FC = () => {
                 {/* Subtotal */}
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-lg font-semibold">Subtotal</span>
-                  <span className="text-2xl font-bold">
+                  <span className="text-lg font-semibold">
                     ${state.totalAmount.toFixed(2)}
                   </span>
                 </div>

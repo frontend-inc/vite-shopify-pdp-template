@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getCollectionProducts } from '../services/shopify/api';
 import ProductCard from './ProductCard';
 import ProductModal from './ProductModal';
+import { Button } from './ui/button';
 
 interface ProductImage {
   url: string;
@@ -120,16 +121,25 @@ const CollectionDetail: React.FC<CollectionDetailProps> = ({ collectionHandle })
 
   if (error) {
     return (
-      <div className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 text-center">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-8 max-w-md mx-auto">
-            <h3 className="text-lg font-semibold text-red-800 mb-2">
-              Failed to Load Collection
-            </h3>
-            <p className="text-red-600">
-              {error}
-            </p>
+      <div className="container mx-auto px-4 py-24 text-center">
+        <div className="max-w-lg mx-auto">
+          <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
+            <i className="ri-shopping-bag-line text-3xl text-gray-400"></i>
           </div>
+          <h2 className="text-2xl font-heading font-semibold text-gray-900 mb-3">
+            Collection Not Found
+          </h2>
+          <p className="text-gray-500 mb-8 leading-relaxed">
+            {error || "We couldn't find the collection you're looking for. It may have been removed or the link might be incorrect."}
+          </p>
+          <Button
+            onClick={() => window.history.back()}
+            variant="outline"
+            className="px-8"
+          >
+            <i className="ri-arrow-left-line mr-2"></i>
+            Go Back
+          </Button>
         </div>
       </div>
     );
